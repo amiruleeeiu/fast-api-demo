@@ -1,7 +1,10 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
+from fastapi.staticfiles import StaticFiles
 from jose import jwt
 import requests
+from app.api.routes import router
+from app.core.config import settings
 
 app = FastAPI()
 
@@ -63,3 +66,8 @@ def protected_route(user=Depends(verify_token)):
         "email": user.get("email"),
         # "data":user
     }
+
+app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads")
+
+# Register API routes
+app.include_router(router)
