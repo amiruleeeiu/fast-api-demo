@@ -4,3 +4,6 @@ python-jose[cryptography]
 requests
 python-multipart
 pydantic
+python-keycloak
+httpx
+pydantic[email]

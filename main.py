@@ -5,6 +5,7 @@ from jose import jwt
 import requests
 from app.api.routes import router
 from app.core.config import settings
+from app.routers import auth, user
 
 app = FastAPI()
 
@@ -71,3 +72,5 @@ app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads"
 
 # Register API routes
 app.include_router(router)
+app.include_router(auth.router)
+app.include_router(user.router)
